@@ -12,7 +12,7 @@ ssize_t rio_readline(int fd, void *usrbuf, size_t maxlen) {
 	for (n = 1; n < maxlen; n++)
 		if ((rc = read(fd, &c, 1)) == 1) {
 			*buf++ = c;
-			if (c == '\n')
+			if (c == '\r')
 				break;
 		} else if (rc == 0) {
 			if (n == 1)
@@ -24,5 +24,24 @@ ssize_t rio_readline(int fd, void *usrbuf, size_t maxlen) {
 		}
 
 	*buf = 0;
+	return n;
+}
+
+ssize_t rio_write(int fd, void *usrbuf, size_t n) {
+	size_t nleft = n;
+	ssize_t nwritten;
+	char *bufp = usrbuf;
+
+	while (nleft > 0) {
+		if ((nwritten = write(fd, bufp, nleft)) <= 0)
+			if (errno == EINTR)
+				nwritten = 0;
+			else
+				return -1;
+
+		nleft -= nwritten;
+		bufp += nwritten;
+	}
+
 	return n;
 }

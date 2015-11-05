@@ -32,3 +32,27 @@ int open_listenfd(unsigned short port) {
 
 	return listenfd;
 }
+
+int open_clientfd(char *hostname, unsigned short port) {
+	int clientfd;
+	struct in_addr *addr;
+	struct hostent *hp;
+	struct sockaddr_in serveraddr;
+	char **p;
+
+	if ((clientfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+		return -1;
+
+	if ((hp = gethostbyname(hostname)) == NULL)
+		return -2;
+
+	memset((char*)&serveraddr, 0, sizeof(serveraddr));
+	serveraddr.sin_family = AF_INET;
+	memcpy((char *)&serveraddr.sin_addr.s_addr, (char *)hp->h_addr_list[0], hp->h_length);
+	serveraddr.sin_port = htons(port);
+
+	if (connect(clientfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0)
+		return -3;
+
+	return clientfd;
+}
