@@ -1,0 +1,9 @@
+GET http://www.baidu.com/ HTTP/1.1
+Host: www.baidu.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:41.0) Gecko/20100101 Firefox/41.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Cookie: BDUSS=XM2SHByZlVFMWx-cVF3ZklCaEpLR2szTkFiOXhEZE9mckU3cjQtejBqbjU0RmxVQVFBQUFBJCQAAAAAAAAAAAEAAAAXFq0GX9bB1~DM7M~CXwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPlTMlT5UzJUc; BAIDUID=2A719920FF0308716A07AD50D283D943:FG=1; sugstore=0; BIDUPSID=2D962ABAE31C9345877E60456966364F; PSTM=1435494519; BD_UPN=133352
+Connection: keep-alive
+
