@@ -1,12 +1,12 @@
 SRC = ${wildcard *.c}
-OBJ = ${patsubst %.c, %.out, $(SRC)}
+TAR = ${patsubst %.c, %.out, $(SRC)}
 
-all: $(OBJ)
+all: $(TAR)
 
-$(OBJ): %.out : %.c
+$(TAR): %.out: %.c
 	cc $^ -o $@ 
 
 clean:
-	rm $(OBJ)
+	rm $(TAR)
 
 .PHONY:all clean
