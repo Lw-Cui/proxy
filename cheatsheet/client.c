@@ -27,7 +27,7 @@ int open_clientfd(char *hostname, unsigned short port) {
 		(char *)&serveraddr.sin_addr.s_addr, hp->h_length);
 	serveraddr.sin_port = htons(port);
 
-	if (connect(clientfd, (sockaddr *)&serveraddr, sizeof(serveraddr)) < 0)
+	if (connect(clientfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0)
 		return -1;
 
 	return clientfd;
