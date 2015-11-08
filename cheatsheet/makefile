@@ -4,7 +4,7 @@ TAR = ${patsubst %.c, %.out, $(SRC)}
 all: $(TAR)
 
 $(TAR): %.out: %.c
-	cc $^ -o $@ 
+	cc $^ -o $@ -g
 
 clean:
 	rm $(TAR)

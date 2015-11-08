@@ -1,4 +1,7 @@
 #include <sys/types.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <sys/types.h>
 #include <stdio.h>
@@ -89,8 +92,9 @@ int open_clientfd(char *hostname, unsigned short port) {
 int main(int args, char **agrv) {
 	int port = 80, clientfd = -1, requestfd;
 	int stat;
-	char *host = "baidu.com";
+	char *host = "localhost";
 	char recv[MAX], send[MAX];
+	int filefd = open("test.html", O_WRONLY, 0);
 
 	switch (args) {
 	case 3:
@@ -107,8 +111,8 @@ int main(int args, char **agrv) {
 	if (clientfd < 0)
 		return 0;
 
-	//requestfd = open("simpleRequest", O_RDONLY, 0);
-	requestfd = open("exampleRequest", O_RDONLY, 0);
+	requestfd = open("simpleRequest", O_RDONLY, 0);
+	//requestfd = open("exampleRequest", O_RDONLY, 0);
 
 	while (rio_readline(requestfd, send, MAX)) {
 		printf("%s", send);
@@ -119,6 +123,7 @@ int main(int args, char **agrv) {
 
 	while (rio_readline(clientfd, recv, MAX)) {
 		printf("%s", recv);
+		write(filefd, recv, strlen(recv));
 	}
 
 	close(clientfd);
